@@ -1,0 +1,67 @@
+.container {
+    width: 300px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center; /* Center align text within the container */
+  }
+  
+  .logo-container {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .avatar {
+    max-width: 100%; /* Ensure the logo fits within the available space */
+    height: auto; /* Maintain the aspect ratio of the logo */
+  }
+  
+  
+  h1 {
+    margin-bottom: 20px;
+    font-size: 24px; /* Increase the font size for the title */
+  }
+  
+  p {
+    margin-bottom: 20px;
+    font-style: italic; /* Make the text italic */
+  }
+  
+  form {
+    margin-bottom: 20px;
+  }
+  
+  input[type="text"],
+  input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+    border-radius: 5px; /* Add rounded corners to input fields */
+  }
+  
+  button {
+    background-color: #008cba;
+    color: white;
+    padding: 10px 0; /* Adjust padding to center the text vertically within the button */
+    border: none;
+    cursor: pointer;
+    width: 107%;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    font-weight: bold;
+    font-size: 16px;
+  }
+  
+  button:hover {
+    background-color: #0069a3;
+  }
+  
+  /* Center the button horizontally within the container */
+  form button {
+    display: block;
+    margin: 0 auto;
+  }
+  
+  
