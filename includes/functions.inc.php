@@ -169,7 +169,7 @@ function handleFormSubmission($conn, $displayOptions = [], $isApprove, $isUser)
     $date = $_POST['date'];
 
     // Build the SQL query dynamically based on the selected values
-    $sql = "SELECT * FROM reservations WHERE 1 ORDER BY reservation_date ASC";
+    $sql = "SELECT * FROM reservations WHERE 1";
     if ($isApprove === 1) {
         $sql = "SELECT * FROM reservations WHERE status = 'approved'";
     }
@@ -191,6 +191,8 @@ function handleFormSubmission($conn, $displayOptions = [], $isApprove, $isUser)
     if (!empty($date)) {
         $sql .= " AND reservation_date = '$date'";
     }
+
+    $sql .= " ORDER BY reservation_date ASC";
 
     // Execute the query and fetch the results
     $result = $conn->query($sql);
