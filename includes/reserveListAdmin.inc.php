@@ -12,5 +12,5 @@ if (isset($_POST['pending'])) {
     foreach ($_POST['booking'] as $booking) {
         pendingBooking($conn, $booking);
     }
-    // header("Location: ../reserveListAdmin.php");
+    header("Location: ../bookingListAdmin.php");
 }

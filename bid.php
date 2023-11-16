@@ -33,7 +33,6 @@ $endTime = $_GET['end_time'];
 
             <form action="includes/bid.inc.php" method="post">
 
-                <input type="hidden" name="tmp" id="tmp" value="tmp1">
                 <input type="hidden" name="facility_id" id="facility_id" value="<?php echo $facilityId; ?>">
                 <input type="hidden" name="club" id="club" value="<?php echo $club; ?>">
                 <input type="hidden" name="purpose" id="club" value="<?php echo $purpose; ?>">
@@ -43,7 +42,7 @@ $endTime = $_GET['end_time'];
 
                 <label for="bid">Place Your Bid</label>
                 <p>Current Bid: RM<?php echo getHighestCurrentBid($conn, $facilityId, $date, $startTime, $endTime); ?></p>
-                <input type="number" name="bid" min="10">
+                <input type="number" name="bid" min="<?php echo getHighestCurrentBid($conn, $facilityId, $date, $startTime, $endTime); ?>" >
 
                 <button type="submit" name="bidBtn">Bid</button>
                 <button type="submit" name="noBidBtn">No Thanks</button>

@@ -14,7 +14,10 @@ $startTime = $_POST['start_time'];
 $endTime = $_POST['end_time'];
 
 if (isset($_POST['bidBtn'])) {
-
+    if (empty($_POST['bid'])) {
+        header("Location: ../bid.php?club=$club&purpose=$purpose&facility_id=$facilityId&date=$date&start_time=$startTime&end_time=$endTime");
+        exit();
+    }
 
     echo "$club<br>";
     echo "$purpose<br>";
@@ -49,6 +52,6 @@ if (isset($_POST['noBidBtn'])) {
     exit();
 }
 
-if(isset($_POST['editBid'])) {
+if (isset($_POST['editBid'])) {
     echo "asd";
 }

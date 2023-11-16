@@ -4,7 +4,9 @@ function facilityIdOptionList($conn)
     $rows = getAllFacilitiesDetails($conn);
 
     foreach ($rows as $row) {
-        echo '<option value="' . $row['id'] . '">' . $row['name'] . '</option>';
+        if ($row['status'] === "available") {
+            echo '<option value="' . $row['id'] . '">' . $row['name'] . '</option>';
+        }
     }
 }
 
@@ -169,7 +171,7 @@ function handleFormSubmission($conn, $displayOptions = [], $isApprove, $isUser)
     $date = $_POST['date'];
 
     // Build the SQL query dynamically based on the selected values
-    $sql = "SELECT * FROM reservations WHERE 1 ORDER BY reservation_date ASC";
+    $sql = "SELECT * FROM reservations WHERE 1";
     if ($isApprove === 1) {
         $sql = "SELECT * FROM reservations WHERE status = 'approved'";
     }
@@ -191,6 +193,8 @@ function handleFormSubmission($conn, $displayOptions = [], $isApprove, $isUser)
     if (!empty($date)) {
         $sql .= " AND reservation_date = '$date'";
     }
+
+    $sql .= " ORDER BY reservation_date ASC";
 
     // Execute the query and fetch the results
     $result = $conn->query($sql);
@@ -238,10 +242,9 @@ function handleFormSubmission($conn, $displayOptions = [], $isApprove, $isUser)
         if (in_array('edit', $displayOptions) && $row['status'] === 'pending') {
             echo '<td><a href="editMyBooking.php?booking_id=' . $row['id'] . '&facility_id=' . $row['facility_id'] . ' ">Edit</a></td>';
         }
-        if (in_array('checkbox', $displayOptions) && $row['status'] === 'pending') {
+        if ((in_array('checkbox', $displayOptions) && !$isUser) || ($isUser && $row['status'] === 'pending')) {
             echo '<td><input type="checkbox" name="booking[]" value="' . $row['id'] . '"></td>';
         }
-
         echo '</tr>';
     }
 }
@@ -297,7 +300,7 @@ function fetchAllBooking($conn, $displayOptions = [], $isApprove, $isUser)
         if (in_array('edit', $displayOptions) && $row['status'] === 'pending') {
             echo '<td><a href="editMyBooking.php?booking_id=' . $row['id'] . '&facility_id=' . $row['facility_id'] . ' ">Edit</a></td>';
         }
-        if (in_array('checkbox', $displayOptions) && $row['status'] === 'pending') {
+        if ((in_array('checkbox', $displayOptions) && !$isUser) || ($isUser && $row['status'] === 'pending')) {
             echo '<td><input type="checkbox" name="booking[]" value="' . $row['id'] . '"></td>';
         }
         echo '</tr>';
@@ -402,4 +405,94 @@ function isBookingOverlapWithApprovedBookingById($conn, $bookingId)
         return 1;
     }
     return 0;
+}
+
+function isEmailAlreadyUsed($conn, $email)
+{
+    $sql = "SELECT COUNT(*) as count FROM users WHERE email = '$email';";
+    $result = $conn->query($sql);
+
+    if (!$result) {
+        die();
+    }
+    $row = $result->fetch_assoc();
+
+    if ($row['count'] > 0) {
+        return 1;
+    }
+    return 0;
+}
+function isUsernameAlreadyUsed($conn, $username)
+{
+    $sql = "SELECT COUNT(*) as count FROM users WHERE username = '$username';";
+    $result = $conn->query($sql);
+
+    if (!$result) {
+        die();
+    }
+    $row = $result->fetch_assoc();
+
+    if ($row['count'] > 0) {
+        return 1;
+    }
+    return 0;
+}
+
+function fetchAllFacility($conn, $displayOptions = [], $id)
+{
+    $sql = "SELECT * FROM facilities;";
+    if (!empty($id)) {
+        $sql = "SELECT * FROM facilities WHERE id = '$id';";
+    }
+    $result = $conn->query($sql);
+
+    if (!$result) {
+        die();
+    }
+
+    while ($row = $result->fetch_assoc()) {
+        echo '<tr>';
+        if (in_array('id', $displayOptions)) {
+            echo '<td>' . $row['id'] . '</td>';
+        }
+        if (in_array('name', $displayOptions)) {
+            echo '<td>' . $row['name'] . '</td>';
+        }
+        if (in_array('description', $displayOptions)) {
+            echo '<td>' . $row['description'] . '</td>';
+        }
+        if (in_array('capacity', $displayOptions)) {
+            echo '<td>' . $row['capacity'] . '</td>';
+        }
+        if (in_array('location', $displayOptions)) {
+            echo '<td>' . $row['location'] . '</td>';
+        }
+        if (in_array('status', $displayOptions)) {
+            echo '<td>' . $row['status'] . '</td>';
+        }
+        if (in_array('checkbox', $displayOptions)) {
+            echo '<td><input type="checkbox" name="id[]" value="' . $row['id'] . '"><a href="editFacility.php?id=' . $row['id'] . '">/Edit</a></td>';
+        }
+        echo '</tr>';
+    }
+}
+
+function deleteFacilityById($conn, $id)
+{
+    $sql = "DELETE FROM facilities WHERE id = '$id'";
+    $result = $conn->query($sql);
+
+    if (!$result) {
+        die();
+    }
+}
+
+function updateFacility($conn, $id, $column, $newData)
+{
+    $sql = "UPDATE facilities SET $column = '$newData' WHERE id = '$id';";
+    $result = $conn->query($sql);
+
+    if (!$result) {
+        die();
+    }
 }

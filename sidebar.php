@@ -8,6 +8,7 @@
                 <?php
                 if (isset($_SESSION['is_admin'])) {
                     echo '<li><a href="bookingListAdmin.php"><i class="fas fa-address-card"></i>Reserve List</a></li>';
+                    echo '<li><a href="manageFacility.php"><i class="fas fa-address-card"></i>Manage Facility</a></li>';
                 }
                 if (!isset($_SESSION['is_admin'])) {
                     echo '<li><a href="myBooking.php"><i class="fas fa-address-card"></i>My Booking</a></li>';
