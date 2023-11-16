@@ -11,7 +11,7 @@ include_once 'includes/db.inc.php';
   <title>User Dashboard</title>
   <link rel="stylesheet" href="css/sidebars.css">
   <link rel="stylesheet" href="css/reservation.css">
-  <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+  <!-- <script src="https://kit.fontawesome.com/b99e675b6e.js"></script> -->
 </head>
 
 <body>
@@ -19,7 +19,6 @@ include_once 'includes/db.inc.php';
   <div class="main-content">
     <h1>Make Reservation</h1>
     <div class="container">
-      <!-- <form action="includes/reservation.inc.php?facility_id=<?php echo $_GET['facility_id']; ?>&facility_name=<?php echo $_GET['facility_name'] ?>" method="post"> -->
       <?php
       if (isset($_GET['occupied'])) {
         echo '<p>Already Occupied</p>';
@@ -34,24 +33,24 @@ include_once 'includes/db.inc.php';
       <form action="includes/reservation.inc.php" method="post">
 
         <label for="club">Club/Organization Name</label>
-        <input type="text" name="club">
+        <input type="text" name="club" required>
 
         <label for="purpose">Purpose of booking</label>
-        <input type="text" name="purpose">
+        <input type="text" name="purpose" required>
 
         <label for="select_facility">Choose Facility:</label>
-        <select name="selected_facility">
+        <select name="selected_facility" required>
           <?php facilityIdOptionList($conn); ?>
         </select>
 
         <label for="date">Date:</label>
-        <input type="date" name="date">
+        <input type="date" name="date" required>
 
         <label for="start_time">Start Time:</label>
-        <input type="time" name="start_time">
+        <input type="time" name="start_time" required>
 
         <label for="end_time">End Time:</label>
-        <input type="time" name="end_time">
+        <input type="time" name="end_time" required>
 
         <button type="submit" name="reserve">Reserve</button>
       </form>

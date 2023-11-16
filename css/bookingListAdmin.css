@@ -1,0 +1,72 @@
+.main-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: fit-content;
+    height: fit-content;
+    padding: 20px;
+    margin: 0px 60px;
+}
+
+
+.logo-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.logo-container img {
+    max-width: 85%;
+    /* Ensure the logo fits within the available space */
+    height: auto;
+    /* Maintain the aspect ratio of the logo */
+}
+
+h1 {
+    color: #333;
+}
+
+p {
+    color: #777;
+}
+
+table {
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table,
+th,
+td {
+    border: 1px solid #ddd;
+}
+
+
+thead {
+    background-color: #333;
+    color: #fff;
+}
+
+a {
+    text-decoration: none;
+    color: #3498db;
+}
+
+
+th,
+td {
+    padding: 20px;
+    text-align: left;
+}
+
+table {
+    width: 100%;
+}

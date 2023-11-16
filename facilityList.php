@@ -18,7 +18,8 @@ $result = $conn->query($sql)
     <title>User Dashboard</title>
     <!-- <link rel="stylesheet" href="css/dashboard.css"> Link to your CSS file for styling -->
     <link rel="stylesheet" href="css/sidebars.css">
-    <link rel="stylesheet" href="css/dashboard.css">
+    <!-- <link rel="stylesheet" href="css/dashboard.css"> -->
+    <link rel="stylesheet" href="css/facilityList.css">
 </head>
 
 <body>
@@ -42,29 +43,22 @@ $result = $conn->query($sql)
                 </tr>
                 <?php
                 while ($row = $result->fetch_assoc()) {
-                    echo "<tr>";
-                    echo "<td>" . $row['id'] . "</td>";
-                    echo "<td>" . $row['name'] . "</td>";
-                    echo "<td>" . $row['description'] . "</td>";
-                    echo "<td>" . $row['capacity'] . "</td>";
-                    echo "<td>" . $row['location'] . "</td>";
-                    // echo '<td><a href="schedule.php?facility_id=' . $row['id'] . '&facility_name=' . $row['name'] . '">Schedule</a></td>';
-
-                    // // Add a conditional link to reservation.php
-                    // if ($row['status'] == 'available') {
-                    //     echo "<td><a href='reservation.php?facility_id={$row['id']}&facility_name={$row['name']}'>Reserve</a></td>";
-                    // } else {
-                    //     echo "<td>" . ($row['status'] == 'reserved' ? 'Reserved' : 'Occupied') . "</td>";
-                    // }
-
-                    echo "</tr>";
+                    if ($row['status'] === "available") {
+                        echo "<tr>";
+                        echo "<td>" . $row['id'] . "</td>";
+                        echo "<td>" . $row['name'] . "</td>";
+                        echo "<td>" . $row['description'] . "</td>";
+                        echo "<td>" . $row['capacity'] . "</td>";
+                        echo "<td>" . $row['location'] . "</td>";
+                        echo "</tr>";
+                    }
                 }
                 ?>
             </table>
         </div>
         <div class="button-container">
-            <a href="schedule.php">Schedule</a>
-            <a href="reservation.php">Reservation</a>
+            <!-- <a href="schedule.php">Schedule</a> -->
+            <a href="reservation.php">Make a Reservation</a>
         </div>
     </div>
 </body>

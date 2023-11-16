@@ -10,27 +10,36 @@ include_once 'includes/db.inc.php';
 <head>
   <title>Admin Dashboard</title>
   <link rel="stylesheet" href="css/sidebars.css">
-  <link rel="stylesheet" href="css/reserveListAdmin.css"> <!-- Link to your CSS file for styling -->
+  <link rel="stylesheet" href="css/schedule.css"> <!-- Link to your CSS file for styling -->
 </head>
 
 <body>
   <?php include_once 'sidebar.php'; ?>
   <div class="main-content">
     <div class="container">
-      <form action="" method="post">
-        <label for="selected_facility">Choose Facility:</label>
-        <select name="selected_facility">
-          <option value="0">None</option>
-          <?php facilityIdOptionList($conn); ?>
-        </select><br>
+      <h1>Schedule</h1>
+      <div class="form-filter">
+        <form action="" method="post">
+          <table class="filter">
+            <tr>
+              <td><label for="selected_facility">Choose Facility:</label></td>
+              <td>
+                <select name="selected_facility">
+                  <option value="0">None</option>
+                  <?php facilityIdOptionList($conn); ?>
+                </select><br>
+              </td>
+            </tr>
+            <tr>
+              <td><label for="date">Date:</label></td>
+              <td><input type="date" name="date"></td>
+            </tr>
+          </table>
+          <button name="submit">Submit</button>
+        </form>
+      </div>
 
-        <label for="date">Date:</label>
-        <input type="date" name="date">
-
-        <button name="submit">Submit</button>
-      </form>
-
-      <table>
+      <table class="list">
         <thead>
           <tr>
             <th>Organizer</th>

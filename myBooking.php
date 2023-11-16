@@ -10,7 +10,8 @@ include_once 'includes/db.inc.php';
 <head>
   <title>Admin Dashboard</title>
   <link rel="stylesheet" href="css/sidebars.css">
-  <link rel="stylesheet" href="css/reserveListAdmin.css"> <!-- Link to your CSS file for styling -->
+  <!-- <link rel="stylesheet" href="css/reserveListAdmin.css"> Link to your CSS file for styling -->
+  <link rel="stylesheet" href="css/myBooking.css">
 </head>
 
 <body>
